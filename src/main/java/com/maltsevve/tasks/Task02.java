@@ -1,4 +1,4 @@
-package main.java.com.maltsevve;
+package main.java.com.maltsevve.tasks;
 
 public class Task02 {
     static String findDuplicate(int[] arr) {

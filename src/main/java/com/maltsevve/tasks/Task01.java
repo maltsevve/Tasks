@@ -1,4 +1,4 @@
-package main.java.com.maltsevve;
+package main.java.com.maltsevve.tasks;
 
 public class Task01 {
     static int[] findItems(int[] arr, int sum) {
