@@ -1,11 +1,18 @@
 package main.java.com.maltsevve.tasks;
 
+import java.util.HashMap;
+import java.util.Map;
+
 public class Task01 {
     static int[] findItems(int[] arr, int sum) {
-        for (int j : arr) {
-            for (int k : arr) {
-                if (j + k == sum) return new int[]{j, k};
-            }
+        HashMap<Integer, Integer> hm = new HashMap<>();
+        for (int k : arr) {
+            hm.put(k, sum - k);
+        }
+
+        for (int i : arr) {
+            if (hm.containsKey(sum - i))
+                return new int[]{i, sum - i};
         }
 
         return new int[]{0, 0};

@@ -1,22 +1,21 @@
 package main.java.com.maltsevve.tasks;
 
+import java.util.HashSet;
+
 public class Task02 {
     static String findDuplicate(int[] arr) {
-        boolean result = false;
         int number = 0;
-        int count = 0;
+        int count = 1;
         String str;
+        HashSet<Integer> hs = new HashSet<>();
 
         for (int k : arr) {
-            if (result) break;
-            for (int i : arr) {
-                if (k == i) {
-                    result = true;
-                    count++;
-                    number = k;
-                }
+            if (!hs.add(k) && (number == 0 || number == k)) {
+                number = k;
+                count++;
             }
         }
+
         if (count > 1) str = "Result: " + true + "\nЧисло " + number + " повторяется " + count + " раз/раза\n";
         else str = "Result: " + false + "\nДубликатов нет\n";
 
