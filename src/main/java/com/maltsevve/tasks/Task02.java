@@ -4,15 +4,19 @@ import java.util.HashSet;
 
 public class Task02 {
     static String findDuplicate(int[] arr) {
+        boolean flag = false;
         int number = 0;
         int count = 1;
         String str;
         HashSet<Integer> hs = new HashSet<>();
 
         for (int k : arr) {
-            if (!hs.add(k) && (number == 0 || number == k)) {
-                number = k;
-                count++;
+            if (!hs.add(k)) {
+                if (!flag) {
+                    number = k;
+                    count++;
+                    flag = true;
+                } else if (number == k) count++;
             }
         }
 
@@ -29,7 +33,7 @@ public class Task02 {
         int[] arr2 = {1, 2, 14, -9, 7, 43, 314, 0};
         System.out.println(findDuplicate(arr2));
 
-        int[] arr3 = {1, 1, 1, 1, 1, 1, 1, 1};
+        int[] arr3 = {0, 1, 1, 1, 1, 1, 1, 1};
         System.out.println(findDuplicate(arr3));
     }
 }
