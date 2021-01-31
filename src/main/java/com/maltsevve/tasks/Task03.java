@@ -1,15 +1,25 @@
 package main.java.com.maltsevve.tasks;
 
 class Foo {
+    int counter = 0;
+
     void first() {
         System.out.print("first");
+        counter++;
     }
 
     void second() {
+        while (counter != 1){
+            Thread.yield();
+        }
         System.out.print("second");
+        counter++;
     }
 
     void third() {
+        while (counter != 2){
+            Thread.yield();
+        }
         System.out.print("third");
     }
 }
@@ -40,20 +50,9 @@ class Task03 {
     public static void main(String[] args) {
         Foo foo = new Foo();
 
-        MyThread A = new MyThread(foo, 1);
-        try {
-            A.thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        new MyThread(foo, 3);
+        new MyThread(foo, 1);
+        new MyThread(foo, 2);
 
-        MyThread B = new MyThread(foo, 2);
-        try {
-            B.thread.join();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
-
-        new MyThread(foo, 3); // поток С
     }
 }
