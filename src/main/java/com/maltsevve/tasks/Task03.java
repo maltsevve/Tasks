@@ -27,29 +27,7 @@ class Foo {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-        System.out.print("third");
-    }
-}
-
-class MyThread implements Runnable {
-    Foo foo;
-    Integer num;
-    Thread thread;
-
-    MyThread(Foo foo, Integer num) {
-        this.foo = foo;
-        this.num = num;
-        thread = new Thread(this);
-        thread.start();
-    }
-
-    @Override
-    public void run() {
-        switch (num) {
-            case 1 -> foo.first();
-            case 2 -> foo.second();
-            case 3 -> foo.third();
-        }
+        System.out.println("third");
     }
 }
 
@@ -57,9 +35,8 @@ class Task03 {
     public static void main(String[] args) {
         Foo foo = new Foo();
 
-        new MyThread(foo, 3);
-        new MyThread(foo, 1);
-        new MyThread(foo, 2);
-
+        new Thread(foo::first, "A").start();
+        new Thread(foo::second, "B").start();
+        new Thread(foo::third, "C").start();
     }
 }
