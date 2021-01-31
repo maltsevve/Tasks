@@ -1,24 +1,31 @@
 package main.java.com.maltsevve.tasks;
 
+import java.util.concurrent.CountDownLatch;
+
 class Foo {
-    int counter = 0;
+    CountDownLatch cdl = new CountDownLatch(1);
+    CountDownLatch cdl2 = new CountDownLatch(1);
 
     void first() {
         System.out.print("first");
-        counter++;
+        cdl.countDown();
     }
 
     void second() {
-        while (counter != 1){
-            Thread.yield();
+        try {
+            cdl.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         System.out.print("second");
-        counter++;
+        cdl2.countDown();
     }
 
     void third() {
-        while (counter != 2){
-            Thread.yield();
+        try {
+            cdl2.await();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
         }
         System.out.print("third");
     }
