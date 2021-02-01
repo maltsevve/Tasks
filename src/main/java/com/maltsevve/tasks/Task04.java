@@ -17,7 +17,9 @@ class FizzBuzz {
 
     public void fizz(Runnable printFizz) throws InterruptedException {
         for (int i = 3; i <= n; i += 3) {
-            if ((i + 3) % 5 == 0) i += 3;
+            if ((i + 3) % 5 == 0) {
+                i += 3;
+            }
             semaphore1.acquire();
             printFizz.run();
             semaphore.release();
@@ -26,7 +28,9 @@ class FizzBuzz {
 
     public void buzz(Runnable printBuzz) throws InterruptedException {
         for (int i = 5; i <= n; i += 5) {
-            if ((i + 5) % 3 == 0) i += 5;
+            if ((i + 5) % 3 == 0) {
+                i += 5;
+            }
             semaphore2.acquire();
             printBuzz.run();
             semaphore.release();
